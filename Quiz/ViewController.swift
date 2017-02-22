@@ -28,6 +28,9 @@ class ViewController: UIViewController {
     ]
     var currentQuestionIndex: Int = 0
     
+    
+    
+    
     @IBAction func showNextQuestion(_ sender: UIButton){
         currentQuestionIndex += 1
         if currentQuestionIndex == questions.count * 2 {
@@ -45,12 +48,18 @@ class ViewController: UIViewController {
         animateLabelTransitions()
     }
     
+    
+    
+    
     @IBAction func showAnswer(_ sender: UIButton){
         if currentQuestionIndex % 2 == 0 {
             let answer: String = answers[currentQuestionIndex / 2]
             answerLabel.text = answer
         }
     }
+    
+    
+    
     
     override func viewDidLoad(){
       super.viewDidLoad()
@@ -59,10 +68,17 @@ class ViewController: UIViewController {
         updateOffScreenLabel()
     }
     
+    
+    
+
+    
     func updateOffScreenLabel() {
         let screenWidth = view.frame.width
         nextQuestionLabelCenterXConstraint.constant = -screenWidth
     }
+    
+    
+    
     
     func animateLabelTransitions() {
         // Force any outstanding layout changes to occur
@@ -92,6 +108,10 @@ class ViewController: UIViewController {
                 self.updateOffScreenLabel()
         })
     }
+    
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
