@@ -29,20 +29,27 @@ class ViewController: UIViewController {
     var currentQuestionIndex: Int = 0
     
     @IBAction func showNextQuestion(_ sender: UIButton){
-      currentQuestionIndex += 1
-        if currentQuestionIndex == questions.count {
+        currentQuestionIndex += 1
+        if currentQuestionIndex == questions.count * 2 {
           currentQuestionIndex = 0
         }
-        let question: String = questions[currentQuestionIndex]
-        nextQuestionLabel.text = question
-        answerLabel.text = "???"
+        if currentQuestionIndex % 2 == 0 {
+            let question: String = questions[currentQuestionIndex / 2]
+            nextQuestionLabel.text = question
+            answerLabel.text = "???"
+        } else {
+            nextQuestionLabel.text = ""
+            answerLabel.text = "???"
+        }
         
         animateLabelTransitions()
     }
     
     @IBAction func showAnswer(_ sender: UIButton){
-        let answer: String = answers[currentQuestionIndex]
-        answerLabel.text = answer
+        if currentQuestionIndex % 2 == 0 {
+            let answer: String = answers[currentQuestionIndex / 2]
+            answerLabel.text = answer
+        }
     }
     
     override func viewDidLoad(){
@@ -69,6 +76,8 @@ class ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5,
             delay: 0,
+            usingSpringWithDamping: 0.6,
+            initialSpringVelocity: 0.2,
             options: [.curveLinear],
             animations: {
                 self.currentQuestionLabel.alpha = 0
